@@ -3,1746 +3,1069 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Construction Business Dashboard</title>
-    <!-- Using Tailwind CSS via CDN with specific version for stability -->
-    <script src="https://cdn.tailwindcss.com/3.3.0"></script>
-    <!-- Font Awesome for icons -->
+    <title>Ilyas Construction | Professional Building Services</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        /* Custom styles */
-        .toast {
-            transition: all 0.3s ease;
+        :root {
+            --primary-dark: #2C3E50;
+            --primary-light: #34495E;
+            --accent: #E67E22;
+            --light-bg: #F9F9F9;
+            --text-dark: #333;
+            --text-light: #777;
+            --white: #FFFFFF;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
         }
-        .tab-content {
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        .pic-logo{
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+        }
+
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-color: var(--white);
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--primary-dark);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background-color: var(--primary-dark);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-menu li {
+            margin-left: 2rem;
+        }
+        
+        .nav-menu a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .nav-menu a:hover {
+            color: var(--accent);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            color: var(--white);
+            margin-top: 80px;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: var(--white);
+            padding: 12px 30px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .btn:hover {
+            background-color: #d35400;
+            transform: translateY(-3px);
+        }
+        
+        /* Services Section */
+        .section {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .service-card {
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+        
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Portfolio Section */
+        .portfolio {
+            background-color: var(--light-bg);
+        }
+        
+        .portfolio-filters {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            background: none;
+            border: none;
+            padding: 8px 20px;
+            margin: 0 5px 10px;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-light);
+            transition: var(--transition);
+        }
+        
+        .filter-btn.active, .filter-btn:hover {
+            color: var(--accent);
+        }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .portfolio-item {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            height: 250px;
+        }
+        
+        .portfolio-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(44, 62, 80, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+        
+        .portfolio-item:hover .portfolio-img {
+            transform: scale(1.1);
+        }
+        
+        .portfolio-overlay h3 {
+            color: var(--white);
+            margin-bottom: 10px;
+        }
+        
+        .portfolio-overlay p {
+            color: var(--white);
+            margin-bottom: 20px;
+        }
+        
+        /* Testimonials */
+        .testimonials-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .testimonial {
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+        
+        .testimonial-content {
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-right: 1rem;
+            object-fit: cover;
+        }
+        
+        .author-info h4 {
+            margin-bottom: 0.2rem;
+        }
+        
+        .author-info p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        /* FAQ Section */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        
+        .faq-question {
+            background-color: var(--primary-dark);
+            color: var(--white);
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+        
+        .faq-answer {
+            background-color: var(--white);
+            padding: 1.5rem;
             display: none;
         }
-        .tab-content.active {
+        
+        .faq-active .faq-answer {
             display: block;
         }
-        /* Print styles */
-        @media print {
-            .no-print {
-                display: none !important;
+        
+        /* Contact Section */
+        .contact {
+            background-color: var(--light-bg);
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+        
+        .contact-info {
+            margin-bottom: 2rem;
+        }
+        
+        .contact-method {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--white);
+            font-size: 1.2rem;
+            margin-right: 1rem;
+        }
+        
+        .contact-text h3 {
+            margin-bottom: 0.2rem;
+        }
+        
+        .contact-text a {
+            color: var(--text-dark);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .contact-text a:hover {
+            color: var(--accent);
+        }
+        
+        .contact-form {
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: 'Open Sans', sans-serif;
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1465433045946-ba6506ce5a59?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            text-align: center;
+            padding: 5rem 0;
+        }
+        
+        .cta h2 {
+            color: var(--white);
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta p {
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            font-size: 1.1rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary-dark);
+            color: var(--white);
+            padding: 3rem 0 1rem;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-col h3 {
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--accent);
+        }
+        
+        .footer-col p, .footer-col a {
+            color: #ccc;
+            margin-bottom: 1rem;
+            display: block;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+        
+        .footer-col a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+        
+        .social-icons {
+            display: flex;
+            margin-top: 1.5rem;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin-right: 10px;
+            transition: var(--transition);
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--accent);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.8rem;
             }
-            .print-table {
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                flex-direction: column;
+                background-color: var(--primary-light);
                 width: 100%;
-                border-collapse: collapse;
+                height: calc(100vh - 80px);
+                transition: 0.4s;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                padding: 2rem;
             }
-            .print-table, .print-table th, .print-table td {
-                border: 1px solid #000;
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .nav-menu li {
+                margin: 1.5rem 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section {
+                padding: 3rem 0;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
             }
         }
     </style>
-    <script>
-        // Tailwind configuration
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: {
-                            50: '#eff6ff',
-                            100: '#dbeafe',
-                            200: '#bfdbfe',
-                            300: '#93c5fd',
-                            400: '#60a5fa',
-                            500: '#3b82f6',
-                            600: '#2563eb',
-                            700: '#1d4ed8',
-                            800: '#1e40af',
-                            900: '#1e3a8a',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
 </head>
-<body class="bg-gray-50 min-h-screen">
-    <!-- Navigation -->
-    <nav class="bg-blue-700 text-white shadow-lg no-print">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col sm:flex-row justify-between items-center py-3">
-                <h1 class="text-xl font-bold mb-2 sm:mb-0">Construction Manager</h1>
-                <ul class="flex flex-wrap justify-center space-x-2 sm:space-x-4">
-                    <li><a href="#home" class="nav-link hover:text-blue-200 transition px-2 py-1 rounded" data-tab="home">Home</a></li>
-                    <li><a href="#workers" class="nav-link hover:text-blue-200 transition px-2 py-1 rounded" data-tab="workers">Workers</a></li>
-                    <li><a href="#projects" class="nav-link hover:text-blue-200 transition px-2 py-1 rounded" data-tab="projects">Projects</a></li>
-                    <li><a href="#contact" class="nav-link hover:text-blue-200 transition px-2 py-1 rounded" data-tab="contact">Contact</a></li>
-                </ul>
-                <div class="flex items-center space-x-2 mt-2 sm:mt-0">
-                    <button id="syncBtn" class="bg-blue-600 hover:bg-blue-500 px-2 py-1 sm:px-3 sm:py-1 rounded flex items-center text-sm">
-                        <i class="fas fa-sync-alt mr-1 sm:mr-2"></i> <span class="hidden sm:inline">Sync Data</span>
-                    </button>
-                    <button id="exportBtn" class="bg-green-600 hover:bg-green-500 px-2 py-1 sm:px-3 sm:py-1 rounded text-sm">
-                        <i class="fas fa-file-export mr-1 sm:mr-2"></i> <span class="hidden sm:inline">Export</span>
-                    </button>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <img src="logo.png" alt="Ilyas Construction Logo" class="pic-logo" >
+            </a>
+            
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Building Dreams With Precision & Excellence</h1>
+                <p>With over 12 years of experience, we deliver quality construction services that stand the test of time. Your vision, our expertise - let's build something amazing together.</p>
+                <a href="#contact" class="btn">Satrt</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Services</h2>
+                <p>Comprehensive construction solutions for residential and commercial projects</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-hard-hat"></i>
+                    </div>
+                    <h3>Construction</h3>
+                    <p>Full-service construction from ground-up to completion with attention to detail and quality.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-paint-roller"></i>
+                    </div>
+                    <h3>Renovation</h3>
+                    <p>Transform your space with our expert renovation services, breathing new life into your property.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-couch"></i>
+                    </div>
+                    <h3>Interior Design</h3>
+                    <p>Beautiful, functional interior spaces designed to match your lifestyle and preferences.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-ruler-combined"></i>
+                    </div>
+                    <h3>Structural Design</h3>
+                    <p>Innovative and efficient structural solutions engineered for safety and durability.</p>
                 </div>
             </div>
         </div>
-    </nav>
+    </section>
 
-    <!-- Toast Notifications -->
-    <div id="toastContainer" class="fixed top-4 right-4 z-50 w-80 space-y-2"></div>
-
-    <!-- Main Content -->
-    <main class="container mx-auto px-4 py-6">
-        <!-- Home Tab -->
-        <div id="home" class="tab-content active">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
-                <div class="bg-white rounded-lg shadow p-4 md:p-6">
-                    <div class="flex items-center">
-                        <div class="rounded-full bg-blue-100 p-2 md:p-3 mr-3 md:mr-4">
-                            <i class="fas fa-hard-hat text-blue-600 text-xl md:text-2xl"></i>
-                        </div>
-                        <div>
-                            <h2 class="text-gray-500 text-sm">Total Workers</h2>
-                            <p id="totalWorkers" class="text-2xl md:text-3xl font-bold">0</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-white rounded-lg shadow p-4 md:p-6">
-                    <div class="flex items-center">
-                        <div class="rounded-full bg-green-100 p-2 md:p-3 mr-3 md:mr-4">
-                            <i class="fas fa-tools text-green-600 text-xl md:text-2xl"></i>
-                        </div>
-                        <div>
-                            <h2 class="text-gray-500 text-sm">Active Projects</h2>
-                            <p id="activeProjects" class="text-2xl md:text-3xl font-bold">0</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-white rounded-lg shadow p-4 md:p-6">
-                    <div class="flex items-center">
-                        <div class="rounded-full bg-red-100 p-2 md:p-3 mr-3 md:mr-4">
-                            <i class="fas fa-money-bill-wave text-red-600 text-xl md:text-2xl"></i>
-                        </div>
-                        <div>
-                            <h2 class="text-gray-500 text-sm">Total Balance Due</h2>
-                            <p id="totalBalance" class="text-2xl md:text-3xl font-bold">$0</p>
-                        </div>
-                    </div>
-                </div>
+    <!-- Portfolio Section -->
+    <section class="section portfolio" id="projects">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Projects</h2>
+                <p>Explore our portfolio of successfully completed projects</p>
             </div>
-
-            <div class="bg-white rounded-lg shadow p-4 md:p-6 mb-6">
-                <h2 class="text-xl font-bold mb-4">Recent Activity</h2>
-                <div class="border rounded-lg overflow-hidden">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th class="px-4 py-2 md:px-6 md:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
-                                <th class="px-4 py-2 md:px-6 md:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Details</th>
-                                <th class="px-4 py-2 md:px-6 md:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-                            </tr>
-                        </thead>
-                        <tbody id="recentActivity" class="bg-white divide-y divide-gray-200">
-                            <tr>
-                                <td colspan="3" class="px-4 py-4 md:px-6 text-center text-gray-500">No recent activity</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+            
+            <div class="portfolio-filters">
+                <button class="filter-btn active">All</button>
+                <button class="filter-btn">Residential</button>
+                <button class="filter-btn">Commercial</button>
+                <button class="filter-btn">Renovation</button>
             </div>
-        </div>
-
-        <!-- Workers Tab -->
-        <div id="workers" class="tab-content">
-            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 md:mb-6">
-                <h2 class="text-xl md:text-2xl font-bold mb-2 sm:mb-0">Workers Management</h2>
-                <button id="addWorkerBtn" class="bg-blue-600 hover:bg-blue-500 text-white px-3 py-2 text-sm md:text-base rounded">
-                    <i class="fas fa-plus mr-1 md:mr-2"></i> Add Worker
-                </button>
-            </div>
-
-            <!-- Worker Filters -->
-            <div class="bg-white p-3 md:p-4 rounded-lg shadow mb-4 md:mb-6">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Search</label>
-                        <input type="text" id="workerSearch" placeholder="Search workers..." class="w-full px-3 py-2 border rounded-md">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Sort By</label>
-                        <select id="workerSort" class="w-full px-3 py-2 border rounded-md">
-                            <option value="name">Name</option>
-                            <option value="balance">Balance (High to Low)</option>
-                            <option value="balance-asc">Balance (Low to High)</option>
-                            <option value="daysWorked">Days Worked</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Items Per Page</label>
-                        <select id="workerPagination" class="w-full px-3 py-2 border rounded-md">
-                            <option value="5">5</option>
-                            <option value="10" selected>10</option>
-                            <option value="25">25</option>
-                            <option value="50">50</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Workers Table -->
-            <div class="bg-white rounded-lg shadow overflow-hidden">
-                <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th class="px-4 py-2 md:px-6 md:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                                <th class="px-4 py-2 md:px-6 md:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Phone</th>
-                                <th class="px-4 py-2 md:px-6 md:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Daily Wage</th>
-                                <th class="px-4 py-2 md:px-6 md:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Days Worked</th>
-                                <th class="px-4 py-2 md:px-6 md:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total Earned</th>
-                                <th class="px-4 py-2 md:px-6 md:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Paid</th>
-                                <th class="px-4 py-2 md:px-6 md:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Balance</th>
-                                <th class="px-4 py-2 md:px-6 md:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="workersTable" class="bg-white divide-y divide-gray-200">
-                            <tr>
-                                <td colspan="8" class="px-4 py-4 md:px-6 text-center text-gray-500">No workers found</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <!-- Pagination -->
-                <div id="workerPaginationContainer" class="bg-white px-3 py-2 md:px-4 md:py-3 flex items-center justify-between border-t border-gray-200">
-                    <!-- Pagination controls will be inserted here -->
-                </div>
-            </div>
-        </div>
-
-        <!-- Projects Tab -->
-        <div id="projects" class="tab-content">
-            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 md:mb-6">
-                <h2 class="text-xl md:text-2xl font-bold mb-2 sm:mb-0">Projects Management</h2>
-                <button id="addProjectBtn" class="bg-blue-600 hover:bg-blue-500 text-white px-3 py-2 text-sm md:text-base rounded">
-                    <i class="fas fa-plus mr-1 md:mr-2"></i> Add Project
-                </button>
-            </div>
-
-            <!-- Project Filters -->
-            <div class="bg-white p-3 md:p-4 rounded-lg shadow mb-4 md:mb-6">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Search</label>
-                        <input type="text" id="projectSearch" placeholder="Search projects..." class="w-full px-3 py-2 border rounded-md">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Sort By</label>
-                        <select id="projectSort" class="w-full px-3 py-2 border rounded-md">
-                            <option value="projectName">Project Name</option>
-                            <option value="startDate">Start Date (Newest)</option>
-                            <option value="startDate-asc">Start Date (Oldest)</option>
-                            <option value="client">Client</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Items Per Page</label>
-                        <select id="projectPagination" class="w-full px-3 py-2 border rounded-md">
-                            <option value="5">5</option>
-                            <option value="10" selected>10</option>
-                            <option value="25">25</option>
-                            <option value="50">50</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Projects Table -->
-            <div class="bg-white rounded-lg shadow overflow-hidden">
-                <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th class="px-4 py-2 md:px-6 md:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Project Name</th>
-                                <th class="px-4 py-2 md:px-6 md:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Client</th>
-                                <th class="px-4 py-2 md:px-6 md:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Address</th>
-                                <th class="px-4 py-2 md:px-6 md:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Start Date</th>
-                                <th class="px-4 py-2 md:px-6 md:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">End Date</th>
-                                <th class="px-4 py-2 md:px-6 md:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Assigned Workers</th>
-                                <th class="px-4 py-2 md:px-6 md:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="projectsTable" class="bg-white divide-y divide-gray-200">
-                            <tr>
-                                <td colspan="7" class="px-4 py-4 md:px-6 text-center text-gray-500">No projects found</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <!-- Pagination -->
-                <div id="projectPaginationContainer" class="bg-white px-3 py-2 md:px-4 md:py-3 flex items-center justify-between border-t border-gray-200">
-                    <!-- Pagination controls will be inserted here -->
-                </div>
-            </div>
-        </div>
-
-        <!-- Contact Tab -->
-        <div id="contact" class="tab-content">
-            <div class="bg-white rounded-lg shadow p-4 md:p-6">
-                <h2 class="text-xl md:text-2xl font-bold mb-4 md:mb-6">Contact & Support</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-                    <div>
-                        <h3 class="text-lg md:text-xl font-semibold mb-3 md:mb-4">Business Information</h3>
-                        <div class="space-y-2 md:space-y-3">
-                            <p><i class="fas fa-building mr-2 text-blue-600"></i> <strong>Company:</strong> Construction & Painting Pro</p>
-                            <p><i class="fas fa-phone mr-2 text-blue-600"></i> <strong>Phone:</strong> (555) 123-4567</p>
-                            <p><i class="fas fa-envelope mr-2 text-blue-600"></i> <strong>Email:</strong> contact@constructionpro.com</p>
-                            <p><i class="fas fa-map-marker-alt mr-2 text-blue-600"></i> <strong>Address:</strong> 123 Builder St, Construction City</p>
-                        </div>
-                    </div>
-                    <div>
-                        <h3 class="text-lg md:text-xl font-semibold mb-3 md:mb-4">Technical Support</h3>
-                        <p class="mb-3 md:mb-4">For technical issues with this dashboard, please contact:</p>
-                        <div class="space-y-2 md:space-y-3">
-                            <p><i class="fas fa-envelope mr-2 text-blue-600"></i> <strong>Email:</strong> support@constructionpro.com</p>
-                            <p><i class="fas fa-phone mr-2 text-blue-600"></i> <strong>Phone:</strong> (555) 987-6543</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- Modals -->
-    <!-- Add/Edit Worker Modal -->
-    <div id="workerModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center hidden z-50 p-4">
-        <div class="bg-white rounded-lg shadow-xl w-full max-w-md max-h-screen overflow-y-auto">
-            <div class="border-b px-4 py-2 flex justify-between items-center">
-                <h3 class="text-xl font-semibold" id="workerModalTitle">Add Worker</h3>
-                <button class="text-black close-modal">&times;</button>
-            </div>
-            <div class="p-4">
-                <form id="workerForm">
-                    <input type="hidden" id="workerId">
-                    <div class="grid grid-cols-1 gap-3">
-                        <div>
-                            <label for="workerName" class="block text-sm font-medium text-gray-700 mb-1">Name *</label>
-                            <input type="text" id="workerName" required class="w-full px-3 py-2 border rounded-md">
-                        </div>
-                        <div>
-                            <label for="workerPhone" class="block text-sm font-medium text-gray-700 mb-1">Phone *</label>
-                            <input type="tel" id="workerPhone" required class="w-full px-3 py-2 border rounded-md">
-                        </div>
-                        <div>
-                            <label for="workerDailyWage" class="block text-sm font-medium text-gray-700 mb-1">Daily Wage ($) *</label>
-                            <input type="number" id="workerDailyWage" required min="0" step="0.01" class="w-full px-3 py-2 border rounded-md">
-                        </div>
-                        <div>
-                            <label for="workerDaysWorked" class="block text-sm font-medium text-gray-700 mb-1">Days Worked *</label>
-                            <input type="number" id="workerDaysWorked" required min="0" class="w-full px-3 py-2 border rounded-md">
-                        </div>
-                        <div>
-                            <label for="workerPaid" class="block text-sm font-medium text-gray-700 mb-1">Amount Paid ($) *</label>
-                            <input type="number" id="workerPaid" required min="0" step="0.01" class="w-full px-3 py-2 border rounded-md">
-                        </div>
-                    </div>
-                    <div class="mt-4 flex justify-end space-x-3">
-                        <button type="button" class="px-4 py-2 bg-gray-300 rounded-md close-modal">Cancel</button>
-                        <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md">Save</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Add/Edit Project Modal -->
-    <div id="projectModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center hidden z-50 p-4">
-        <div class="bg-white rounded-lg shadow-xl w-full max-w-md max-h-screen overflow-y-auto">
-            <div class="border-b px-4 py-2 flex justify-between items-center">
-                <h3 class="text-xl font-semibold" id="projectModalTitle">Add Project</h3>
-                <button class="text-black close-modal">&times;</button>
-            </div>
-            <div class="p-4">
-                <form id="projectForm">
-                    <input type="hidden" id="projectId">
-                    <div class="grid grid-cols-1 gap-3">
-                        <div>
-                            <label for="projectName" class="block text-sm font-medium text-gray-700 mb-1">Project Name *</label>
-                            <input type="text" id="projectName" required class="w-full px-3 py-2 border rounded-md">
-                        </div>
-                        <div>
-                            <label for="projectClient" class="block text-sm font-medium text-gray-700 mb-1">Client *</label>
-                            <input type="text" id="projectClient" required class="w-full px-3 py-2 border rounded-md">
-                        </div>
-                        <div>
-                            <label for="projectAddress" class="block text-sm font-medium text-gray-700 mb-1">Address</label>
-                            <input type="text" id="projectAddress" class="w-full px-3 py-2 border rounded-md">
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                            <div>
-                                <label for="projectStartDate" class="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
-                                <input type="date" id="projectStartDate" class="w-full px-3 py-2 border rounded-md">
-                            </div>
-                            <div>
-                                <label for="projectEndDate" class="block text-sm font-medium text-gray-700 mb-1">End Date</label>
-                                <input type="date" id="projectEndDate" class="w-full px-3 py-2 border rounded-md">
-                            </div>
-                        </div>
-                        <div>
-                            <label for="projectAssignedWorkers" class="block text-sm font-medium text-gray-700 mb-1">Assigned Workers (comma separated)</label>
-                            <input type="text" id="projectAssignedWorkers" class="w-full px-3 py-2 border rounded-md" placeholder="John Doe, Jane Smith">
-                        </div>
-                        <div>
-                            <label for="projectNotes" class="block text-sm font-medium text-gray-700 mb-1">Notes</label>
-                            <textarea id="projectNotes" rows="3" class="w-full px-3 py-2 border rounded-md"></textarea>
-                        </div>
-                    </div>
-                    <div class="mt-4 flex justify-end space-x-3">
-                        <button type="button" class="px-4 py-2 bg-gray-300 rounded-md close-modal">Cancel</button>
-                        <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md">Save</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Import/Export Modal -->
-    <div id="importExportModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center hidden z-50 p-4">
-        <div class="bg-white rounded-lg shadow-xl w-full max-w-md max-h-screen overflow-y-auto">
-            <div class="border-b px-4 py-2 flex justify-between items-center">
-                <h3 class="text-xl font-semibold" id="importExportModalTitle">Export/Import Data</h3>
-                <button class="text-black close-modal">&times;</button>
-            </div>
-            <div class="p-4">
-                <div class="mb-4">
-                    <h4 class="text-lg font-medium mb-3">Export Data</h4>
-                    <div class="grid grid-cols-1 gap-3">
-                        <button id="exportWorkersBtn" class="px-4 py-2 bg-blue-600 text-white rounded-md flex items-center justify-center">
-                            <i class="fas fa-file-export mr-2"></i> Export Workers
-                        </button>
-                        <button id="exportProjectsBtn" class="px-4 py-2 bg-green-600 text-white rounded-md flex items-center justify-center">
-                            <i class="fas fa-file-export mr-2"></i> Export Projects
-                        </button>
+            
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Modern House" class="portfolio-img">
+                    <div class="portfolio-overlay">
+                        <h3>Modern Family Home</h3>
+                        <p>Residential</p>
+                        <a href="#" class="btn">View Project</a>
                     </div>
                 </div>
                 
-                <div>
-                    <h4 class="text-lg font-medium mb-3">Import Data</h4>
-                    <div class="mb-3">
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Select Data Type</label>
-                        <select id="importDataType" class="w-full px-3 py-2 border rounded-md">
-                            <option value="workers">Workers</option>
-                            <option value="projects">Projects</option>
-                        </select>
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Office Building" class="portfolio-img">
+                    <div class="portfolio-overlay">
+                        <h3>Corporate Office Complex</h3>
+                        <p>Commercial</p>
+                        <a href="#" class="btn">View Project</a>
                     </div>
-                    <div class="mb-3">
-                        <label class="block text-sm font-medium text-gray-700 mb-1">CSV File</label>
-                        <input type="file" id="importFile" accept=".csv" class="w-full px-3 py-2 border rounded-md">
+                </div>
+                
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1588880331179-bc9b93a8cb5e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Kitchen Renovation" class="portfolio-img">
+                    <div class="portfolio-overlay">
+                        <h3>Kitchen Transformation</h3>
+                        <p>Renovation</p>
+                        <a href="#" class="btn">View Project</a>
                     </div>
-                    <div class="mb-3">
-                        <label class="flex items-center">
-                            <input type="checkbox" id="replaceData" class="mr-2">
-                            <span class="text-sm font-medium text-gray-700">Replace existing data</span>
-                        </label>
-                    </div>
-                    <button id="importBtn" class="px-4 py-2 bg-purple-600 text-white rounded-md w-full">
-                        Import Data
-                    </button>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Confirmation Modal -->
-    <div id="confirmModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center hidden z-50 p-4">
-        <div class="bg-white rounded-lg shadow-xl w-full max-w-md max-h-screen overflow-y-auto">
-            <div class="border-b px-4 py-2 flex justify-between items-center">
-                <h3 class="text-xl font-semibold" id="confirmModalTitle">Confirm Action</h3>
-                <button class="text-black close-modal">&times;</button>
+    <!-- Testimonials Section -->
+    <section class="section" id="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>Client Testimonials</h2>
+                <p>What our clients say about our work and service</p>
             </div>
-            <div class="p-4">
-                <p id="confirmMessage">Are you sure you want to perform this action?</p>
-                <div class="mt-4 flex justify-end space-x-3">
-                    <button class="px-4 py-2 bg-gray-300 rounded-md close-modal">Cancel</button>
-                    <button id="confirmAction" class="px-4 py-2 bg-red-600 text-white rounded-md">Confirm</button>
+            
+            <div class="testimonials-container">
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        <p>"Ilyas Construction transformed our outdated home into a modern living space. Their attention to detail and commitment to quality exceeded our expectations. The project was completed on time and within budget."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="John Smith" class="author-img">
+                        <div class="author-info">
+                            <h4>John Smith</h4>
+                            <p>Residential Renovation Project</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        <p>"We chose Ilyas Construction for our office expansion project, and they delivered exceptional results. Their team was professional, communicative, and addressed all our concerns promptly. Highly recommended!"</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah Johnson" class="author-img">
+                        <div class="author-info">
+                            <h4>Sarah Johnson</h4>
+                            <p>Commercial Office Project</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Setup Instructions Modal -->
-    <div id="setupModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50 p-4">
-        <div class="bg-white rounded-lg shadow-xl w-full max-w-4xl max-h-screen overflow-y-auto">
-            <div class="border-b px-4 py-2 flex justify-between items-center">
-                <h3 class="text-xl font-semibold">Setup Instructions</h3>
+    <!-- FAQ Section -->
+    <section class="section" id="faq">
+        <div class="container">
+            <div class="section-title">
+                <h2>Frequently Asked Questions</h2>
+                <p>Find answers to common questions about our construction services</p>
             </div>
-            <div class="p-4">
-                <div class="mb-6">
-                    <h4 class="text-lg font-medium mb-2 text-blue-700">Google Sheets Integration Setup</h4>
-                    <p class="mb-4">To use this dashboard with Google Sheets, follow these steps:</p>
-                    
-                    <div class="bg-gray-100 p-4 rounded-lg mb-4">
-                        <h5 class="font-medium mb-2">1. Create Your Google Sheet</h5>
-                        <p class="mb-2">Create a new Google Sheet with two worksheets named exactly:</p>
-                        <ul class="list-disc pl-5 mb-3">
-                            <li><strong>Workers</strong> - with columns: id, name, phone, daily_wage, days_worked, paid</li>
-                            <li><strong>Projects</strong> - with columns: id, project_name, client, address, start_date, end_date, assigned_workers, notes</li>
-                        </ul>
-                        
-                        <h5 class="font-medium mb-2 mt-4">2. Deploy Google Apps Script</h5>
-                        <p class="mb-2">Create a new Google Apps Script project and paste this code:</p>
-                        <pre class="bg-gray-200 p-3 rounded overflow-x-auto text-sm mb-3">
-// Replace with your Google Sheet ID
-const SHEET_ID = 'YOUR_SHEET_ID_HERE';
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How long does a typical construction project take?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>The timeline varies based on project scope, but a typical home renovation takes 4-8 weeks, while new construction can take 4-6 months. We provide a detailed timeline during the planning phase and keep you updated throughout the project.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Do you provide free estimates?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, we offer free, no-obligation estimates for all projects. Our project manager will visit your site, discuss your requirements, and provide a detailed quote within 2-3 business days.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What warranties do you offer on your work?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We offer a 5-year warranty on structural work and a 2-year warranty on all other construction work. All materials used come with their manufacturer warranties, which we'll help you register.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can you help with permits and regulations?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolutely. We handle all necessary permits, approvals, and ensure compliance with local building codes and regulations. Our team stays updated on all construction regulations to ensure your project meets all requirements.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How do you handle project changes or modifications?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We understand that changes may be needed during a project. We have a formal change order process where we document requested changes, provide updated pricing and timelines, and get your approval before proceeding.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-function doGet(e) {
-  return handleRequest(e);
-}
-
-function doPost(e) {
-  return handleRequest(e);
-}
-
-function handleRequest(e) {
-  const { parameter, postData: { contents } = {} } = e;
-  const data = contents ? JSON.parse(contents) : parameter;
-  
-  const { action, sheet } = data;
-  const spreadsheet = SpreadsheetApp.openById(SHEET_ID);
-  const sheetObj = spreadsheet.getSheetByName(sheet);
-  
-  if (!sheetObj) {
-    return ContentService
-      .createTextOutput(JSON.stringify({ error: 'Sheet not found' }))
-      .setMimeType(ContentService.MimeType.JSON);
-  }
-  
-  let result;
-  switch (action) {
-    case 'read':
-      result = readData(sheetObj);
-      break;
-    case 'create':
-      result = createData(sheetObj, data);
-      break;
-    case 'update':
-      result = updateData(sheetObj, data);
-      break;
-    case 'delete':
-      result = deleteData(sheetObj, data);
-      break;
-    default:
-      result = { error: 'Invalid action' };
-  }
-  
-  return ContentService
-    .createTextOutput(JSON.stringify(result))
-    .setMimeType(ContentService.MimeType.JSON);
-}
-
-function readData(sheet) {
-  const data = sheet.getDataRange().getValues();
-  const headers = data[0];
-  const rows = data.slice(1);
-  
-  return rows.map(row => {
-    const obj = {};
-    headers.forEach((header, i) => {
-      obj[header] = row[i];
-    });
-    return obj;
-  });
-}
-
-function createData(sheet, data) {
-  const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
-  const newRow = headers.map(header => data[header] || '');
-  sheet.appendRow(newRow);
-  return { success: true, id: Date.now() };
-}
-
-function updateData(sheet, data) {
-  const id = data.id;
-  const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
-  const idIndex = headers.indexOf('id');
-  
-  if (idIndex === -1) return { error: 'ID column not found' };
-  
-  const dataRange = sheet.getDataRange();
-  const values = dataRange.getValues();
-  
-  for (let i = 1; i < values.length; i++) {
-    if (values[i][idIndex] == id) {
-      headers.forEach((header, j) => {
-        if (header !== 'id' && data[header] !== undefined) {
-          sheet.getRange(i+1, j+1).setValue(data[header]);
-        }
-      });
-      return { success: true };
-    }
-  }
-  
-  return { error: 'Record not found' };
-}
-
-function deleteData(sheet, data) {
-  const id = data.id;
-  const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
-  const idIndex = headers.indexOf('id');
-  
-  if (idIndex === -1) return { error: 'ID column not found' };
-  
-  const dataRange = sheet.getDataRange();
-  const values = dataRange.getValues();
-  
-  for (let i = 1; i < values.length; i++) {
-    if (values[i][idIndex] == id) {
-      sheet.deleteRow(i+1);
-      return { success: true };
-    }
-  }
-  
-  return { error: 'Record not found' };
-}
-                        </pre>
-                        
-                        <h5 class="font-medium mb-2">3. Deploy as Web App</h5>
-                        <p class="mb-2">Click "Deploy" > "New deployment", select "Web app" as the type, set execute permissions to "Anyone", and click "Deploy". Copy the provided URL.</p>
-                        
-                        <h5 class="font-medium mb-2 mt-4">4. Configure the Dashboard</h5>
-                        <p>Paste your Google Apps Script URL here:</p>
-                        <div class="flex mt-2">
-                            <input type="text" id="scriptUrl" placeholder="https://script.google.com/..." class="flex-grow px-3 py-2 border rounded-l-md">
-                            <button id="saveScriptUrl" class="bg-blue-600 text-white px-4 py-2 rounded-r-md">Save</button>
+    <!-- Contact Section -->
+    <section class="section contact" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact Us</h2>
+                <p>Get in touch for a free consultation and estimate</p>
+            </div>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-method">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Visit Us</h3>
+                            <p>123 Construction Avenue, Buildersville, BC 12345</p>
                         </div>
                     </div>
                     
-                    <div class="bg-yellow-100 p-4 rounded-lg mb-4">
-                        <h5 class="font-medium mb-2">Demo Mode</h5>
-                        <p>You can use the app in demo mode with sample data while setting up Google Sheets integration.</p>
-                        <button id="enableDemoMode" class="mt-2 px-4 py-2 bg-blue-600 text-white rounded-md">Enable Demo Mode</button>
+                    <div class="contact-method">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Call Us</h3>
+                            <p><a href="tel:+12345567890">+1 (234) 556-7890</a></p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Email Us</h3>
+                            <p><a href="mailto:info@ilyasconstruction.com" id="emailLink">info@ilyasconstruction.com</a></p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <div class="contact-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>WhatsApp</h3>
+                            <p><a href="https://wa.me/1234567890" id="whatsappLink" target="_blank">+1 (234) 567-890</a></p>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="mb-6">
-                    <h4 class="text-lg font-medium mb-2 text-blue-700">Deployment Instructions</h4>
-                    
-                    <h5 class="font-medium mb-2">Netlify Deployment</h5>
-                    <ol class="list-decimal pl-5 mb-4">
-                        <li>Save this HTML file to your computer</li>
-                        <li>Create an account on <a href="https://netlify.com" class="text-blue-600" target="_blank">netlify.com</a></li>
-                        <li>Drag and drop the HTML file to the Netlify dashboard</li>
-                        <li>Your app will be deployed instantly with a public URL</li>
-                    </ol>
-                    
-                    <h5 class="font-medium mb-2">GitHub Pages Deployment</h5>
-                    <ol class="list-decimal pl-5">
-                        <li>Create a new GitHub repository</li>
-                        <li>Upload this HTML file (rename it to index.html)</li>
-                        <li>Go to Repository Settings > Pages</li>
-                        <li>Select the main branch as the source and click Save</li>
-                        <li>Your app will be available at https://username.github.io/repository-name</li>
-                    </ol>
-                </div>
-                
-                <div class="flex justify-end">
-                    <button id="closeSetup" class="px-4 py-2 bg-blue-600 text-white rounded-md">Get Started</button>
+                <div class="contact-form">
+                    <form id="constructionForm">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="project">Project Details</label>
+                            <textarea id="project" name="project" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn">Submit Request</button>
+                    </form>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Start Your Construction Project?</h2>
+            <p>Contact us today for a free consultation and estimate. Let's discuss how we can bring your vision to life with our expertise and quality craftsmanship.</p>
+            <a href="#contact" class="btn">Get In Touch</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>Ilyas Construction</h3>
+                    <p>Building excellence since 2008. We specialize in residential and commercial construction, delivering quality projects on time and within budget.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <a href="#home">Home</a>
+                    <a href="#about">About Us</a>
+                    <a href="#services">Services</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#testimonials">Testimonials</a>
+                    <a href="#faq">FAQ</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Services</h3>
+                    <a href="#services">Construction</a>
+                    <a href="#services">Renovation</a>
+                    <a href="#services">Interior Design</a>
+                    <a href="#services">Structural Design</a>
+                    <a href="#services">Project Management</a>
+                    <a href="#services">Consultation</a>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Construction Ave, Buildersville, BC 12345</p>
+                    <p><i class="fas fa-phone"></i> <a href="tel:+923053016806">+92 3053016806</a></p>
+                    <p><i class="fas fa-envelope"></i> <a href="mailto:info@ilyasconstruction.com">info@ilyasconstruction.com</a></p>
+                    <p><i class="fas fa-clock"></i> Mon-Fri: 8AM - 6PM</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Ilyas Construction. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
 
     <script>
-        // Demo data for testing without Google Sheets
-        const demoData = {
-            workers: [
-                { id: 1, name: "John Doe", phone: "555-1234", daily_wage: 150, days_worked: 20, paid: 2500, balance: 500 },
-                { id: 2, name: "Jane Smith", phone: "555-5678", daily_wage: 160, days_worked: 18, paid: 2500, balance: 380 },
-                { id: 3, name: "Robert Johnson", phone: "555-9012", daily_wage: 140, days_worked: 22, paid: 2800, balance: 280 },
-                { id: 4, name: "Emily Davis", phone: "555-3456", daily_wage: 155, days_worked: 15, paid: 2000, balance: 325 },
-                { id: 5, name: "Michael Wilson", phone: "555-7890", daily_wage: 165, days_worked: 25, paid: 3500, balance: 625 }
-            ],
-            projects: [
-                { id: 1, project_name: "Office Renovation", client: "ABC Corp", address: "123 Business Ave", start_date: "2023-05-01", end_date: "2023-06-15", assigned_workers: "John Doe, Jane Smith", notes: "Paint walls and install new flooring" },
-                { id: 2, project_name: "House Painting", client: "Smith Family", address: "456 Residential St", start_date: "2023-06-10", end_date: "2023-06-30", assigned_workers: "Robert Johnson", notes: "Exterior painting only" },
-                { id: 3, project_name: "Apartment Complex", client: "XYZ Properties", address: "789 Multi Family Rd", start_date: "2023-07-01", end_date: "2023-08-20", assigned_workers: "Emily Davis, Michael Wilson", notes: "Complete renovation of 10 units" }
-            ]
-        };
-
-        // App state
-        let appState = {
-            useDemoData: false,
-            scriptUrl: '',
-            workers: [],
-            projects: [],
-            currentWorkerPage: 1,
-            currentProjectPage: 1,
-            workersPerPage: 10,
-            projectsPerPage: 10,
-            workerSearchTerm: '',
-            projectSearchTerm: '',
-            workerSortBy: 'name',
-            projectSortBy: 'projectName'
-        };
-
-        // DOM Elements
-        const elements = {
-            // Tabs
-            tabContents: document.querySelectorAll('.tab-content'),
-            navLinks: document.querySelectorAll('.nav-link'),
-            
-            // Home elements
-            totalWorkers: document.getElementById('totalWorkers'),
-            activeProjects: document.getElementById('activeProjects'),
-            totalBalance: document.getElementById('totalBalance'),
-            recentActivity: document.getElementById('recentActivity'),
-            
-            // Worker elements
-            workersTable: document.getElementById('workersTable'),
-            workerSearch: document.getElementById('workerSearch'),
-            workerSort: document.getElementById('workerSort'),
-            workerPagination: document.getElementById('workerPagination'),
-            workerPaginationContainer: document.getElementById('workerPaginationContainer'),
-            
-            // Project elements
-            projectsTable: document.getElementById('projectsTable'),
-            projectSearch: document.getElementById('projectSearch'),
-            projectSort: document.getElementById('projectSort'),
-            projectPagination: document.getElementById('projectPagination'),
-            projectPaginationContainer: document.getElementById('projectPaginationContainer'),
-            
-            // Buttons
-            addWorkerBtn: document.getElementById('addWorkerBtn'),
-            addProjectBtn: document.getElementById('addProjectBtn'),
-            syncBtn: document.getElementById('syncBtn'),
-            exportBtn: document.getElementById('exportBtn'),
-            
-            // Modals
-            modals: document.querySelectorAll('[id$="Modal"]'),
-            closeModalButtons: document.querySelectorAll('.close-modal'),
-            workerModal: document.getElementById('workerModal'),
-            projectModal: document.getElementById('projectModal'),
-            importExportModal: document.getElementById('importExportModal'),
-            confirmModal: document.getElementById('confirmModal'),
-            setupModal: document.getElementById('setupModal'),
-            
-            // Forms
-            workerForm: document.getElementById('workerForm'),
-            projectForm: document.getElementById('projectForm'),
-            
-            // Setup elements
-            scriptUrl: document.getElementById('scriptUrl'),
-            saveScriptUrl: document.getElementById('saveScriptUrl'),
-            enableDemoMode: document.getElementById('enableDemoMode'),
-            closeSetup: document.getElementById('closeSetup')
-        };
-
-        // Initialize the application
-        function initApp() {
-            // Check if we have a saved script URL
-            const savedScriptUrl = localStorage.getItem('constructionScriptUrl');
-            if (savedScriptUrl) {
-                appState.scriptUrl = savedScriptUrl;
-                elements.scriptUrl.value = savedScriptUrl;
-                fetchData();
-            } else {
-                // Show setup modal if no URL is configured
-                elements.setupModal.classList.remove('hidden');
-            }
-            
-            // Load demo data if enabled
-            const useDemoData = localStorage.getItem('constructionUseDemoData');
-            if (useDemoData === 'true') {
-                appState.useDemoData = true;
-                loadDemoData();
-            }
-            
-            // Set up event listeners
-            setupEventListeners();
-            
-            // Render initial data
-            renderWorkers();
-            renderProjects();
-            updateDashboard();
-        }
-
-        // Set up all event listeners
-        function setupEventListeners() {
-            // Tab navigation
-            elements.navLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const tab = link.getAttribute('data-tab');
-                    switchTab(tab);
-                });
-            });
-            
-            // Worker search and filters
-            elements.workerSearch.addEventListener('input', (e) => {
-                appState.workerSearchTerm = e.target.value;
-                appState.currentWorkerPage = 1;
-                renderWorkers();
-            });
-            
-            elements.workerSort.addEventListener('change', (e) => {
-                appState.workerSortBy = e.target.value;
-                renderWorkers();
-            });
-            
-            elements.workerPagination.addEventListener('change', (e) => {
-                appState.workersPerPage = parseInt(e.target.value);
-                appState.currentWorkerPage = 1;
-                renderWorkers();
-            });
-            
-            // Project search and filters
-            elements.projectSearch.addEventListener('input', (e) => {
-                appState.projectSearchTerm = e.target.value;
-                appState.currentProjectPage = 1;
-                renderProjects();
-            });
-            
-            elements.projectSort.addEventListener('change', (e) => {
-                appState.projectSortBy = e.target.value;
-                renderProjects();
-            });
-            
-            elements.projectPagination.addEventListener('change', (e) => {
-                appState.projectsPerPage = parseInt(e.target.value);
-                appState.currentProjectPage = 1;
-                renderProjects();
-            });
-            
-            // Add buttons
-            elements.addWorkerBtn.addEventListener('click', () => {
-                showWorkerModal();
-            });
-            
-            elements.addProjectBtn.addEventListener('click', () => {
-                showProjectModal();
-            });
-            
-            // Sync and export buttons
-            elements.syncBtn.addEventListener('click', () => {
-                syncData();
-            });
-            
-            elements.exportBtn.addEventListener('click', () => {
-                showImportExportModal();
-            });
-            
-            // Form submissions
-            elements.workerForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                saveWorker();
-            });
-            
-            elements.projectForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                saveProject();
-            });
-            
-            // Modal close buttons
-            elements.closeModalButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    closeModals();
-                });
-            });
-            
-            // Click outside modal to close
-            elements.modals.forEach(modal => {
-                modal.addEventListener('click', (e) => {
-                    if (e.target === modal) {
-                        closeModals();
-                    }
-                });
-            });
-            
-            // Setup modal buttons
-            elements.saveScriptUrl.addEventListener('click', saveScriptUrl);
-            elements.enableDemoMode.addEventListener('click', enableDemoMode);
-            elements.closeSetup.addEventListener('click', closeSetup);
-            
-            // Export buttons
-            document.getElementById('exportWorkersBtn').addEventListener('click', exportWorkersCSV);
-            document.getElementById('exportProjectsBtn').addEventListener('click', exportProjectsCSV);
-            document.getElementById('importBtn').addEventListener('click', importCSV);
-        }
-
-        // Switch between tabs
-        function switchTab(tabName) {
-            // Hide all tab contents
-            elements.tabContents.forEach(tab => {
-                tab.classList.remove('active');
-            });
-            
-            // Show the selected tab
-            document.getElementById(tabName).classList.add('active');
-            
-            // Update navigation links
-            elements.navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('data-tab') === tabName) {
-                    link.classList.add('active');
-                }
-            });
-        }
-
-        // Show worker modal for adding/editing
-        function showWorkerModal(worker = null) {
-            const modal = elements.workerModal;
-            const title = modal.querySelector('#workerModalTitle');
-            const form = elements.workerForm;
-            
-            if (worker) {
-                title.textContent = 'Edit Worker';
-                form.querySelector('#workerId').value = worker.id;
-                form.querySelector('#workerName').value = worker.name;
-                form.querySelector('#workerPhone').value = worker.phone;
-                form.querySelector('#workerDailyWage').value = worker.daily_wage;
-                form.querySelector('#workerDaysWorked').value = worker.days_worked;
-                form.querySelector('#workerPaid').value = worker.paid;
-            } else {
-                title.textContent = 'Add Worker';
-                form.reset();
-                form.querySelector('#workerId').value = '';
-            }
-            
-            modal.classList.remove('hidden');
-        }
-
-        // Show project modal for adding/editing
-        function showProjectModal(project = null) {
-            const modal = elements.projectModal;
-            const title = modal.querySelector('#projectModalTitle');
-            const form = elements.projectForm;
-            
-            if (project) {
-                title.textContent = 'Edit Project';
-                form.querySelector('#projectId').value = project.id;
-                form.querySelector('#projectName').value = project.project_name;
-                form.querySelector('#projectClient').value = project.client;
-                form.querySelector('#projectAddress').value = project.address || '';
-                form.querySelector('#projectStartDate').value = project.start_date || '';
-                form.querySelector('#projectEndDate').value = project.end_date || '';
-                form.querySelector('#projectAssignedWorkers').value = project.assigned_workers || '';
-                form.querySelector('#projectNotes').value = project.notes || '';
-            } else {
-                title.textContent = 'Add Project';
-                form.reset();
-                form.querySelector('#projectId').value = '';
-            }
-            
-            modal.classList.remove('hidden');
-        }
-
-        // Show import/export modal
-        function showImportExportModal() {
-            elements.importExportModal.classList.remove('hidden');
-        }
-
-        // Show confirmation modal
-        function showConfirmModal(message, callback) {
-            const modal = elements.confirmModal;
-            modal.querySelector('#confirmMessage').textContent = message;
-            modal.classList.remove('hidden');
-            
-            const confirmButton = modal.querySelector('#confirmAction');
-            // Remove any existing event listeners
-            confirmButton.replaceWith(confirmButton.cloneNode(true));
-            // Add new event listener
-            modal.querySelector('#confirmAction').addEventListener('click', callback);
-        }
-
-        // Close all modals
-        function closeModals() {
-            elements.modals.forEach(modal => {
-                modal.classList.add('hidden');
-            });
-        }
-
-        // Save worker (create or update)
-        function saveWorker() {
-            const form = elements.workerForm;
-            const id = form.querySelector('#workerId').value;
-            const worker = {
-                name: form.querySelector('#workerName').value,
-                phone: form.querySelector('#workerPhone').value,
-                daily_wage: parseFloat(form.querySelector('#workerDailyWage').value),
-                days_worked: parseInt(form.querySelector('#workerDaysWorked').value),
-                paid: parseFloat(form.querySelector('#workerPaid').value)
-            };
-            
-            if (id) {
-                worker.id = id;
-                updateWorker(worker);
-            } else {
-                createWorker(worker);
-            }
-        }
-
-        // Save project (create or update)
-        function saveProject() {
-            const form = elements.projectForm;
-            const id = form.querySelector('#projectId').value;
-            const project = {
-                project_name: form.querySelector('#projectName').value,
-                client: form.querySelector('#projectClient').value,
-                address: form.querySelector('#projectAddress').value,
-                start_date: form.querySelector('#projectStartDate').value,
-                end_date: form.querySelector('#projectEndDate').value,
-                assigned_workers: form.querySelector('#projectAssignedWorkers').value,
-                notes: form.querySelector('#projectNotes').value
-            };
-            
-            if (id) {
-                project.id = id;
-                updateProject(project);
-            } else {
-                createProject(project);
-            }
-        }
-
-        // Create a new worker
-        function createWorker(worker) {
-            if (appState.useDemoData) {
-                worker.id = Date.now();
-                worker.balance = (worker.daily_wage * worker.days_worked) - worker.paid;
-                appState.workers.push(worker);
-                renderWorkers();
-                updateDashboard();
-                closeModals();
-                showToast('Worker added successfully!', 'success');
-                return;
-            }
-            
-            // In a real implementation, this would call the Google Apps Script
-            showToast('Creating worker...', 'info');
-            
-            // Simulate API call
-            setTimeout(() => {
-                worker.id = Date.now();
-                worker.balance = (worker.daily_wage * worker.days_worked) - worker.paid;
-                appState.workers.push(worker);
-                renderWorkers();
-                updateDashboard();
-                closeModals();
-                showToast('Worker added successfully!', 'success');
-            }, 1000);
-        }
-
-        // Update a worker
-        function updateWorker(worker) {
-            if (appState.useDemoData) {
-                const index = appState.workers.findIndex(w => w.id == worker.id);
-                if (index !== -1) {
-                    worker.balance = (worker.daily_wage * worker.days_worked) - worker.paid;
-                    appState.workers[index] = worker;
-                    renderWorkers();
-                    updateDashboard();
-                    closeModals();
-                    showToast('Worker updated successfully!', 'success');
-                }
-                return;
-            }
-            
-            // In a real implementation, this would call the Google Apps Script
-            showToast('Updating worker...', 'info');
-            
-            // Simulate API call
-            setTimeout(() => {
-                const index = appState.workers.findIndex(w => w.id == worker.id);
-                if (index !== -1) {
-                    worker.balance = (worker.daily_wage * worker.days_worked) - worker.paid;
-                    appState.workers[index] = worker;
-                    renderWorkers();
-                    updateDashboard();
-                    closeModals();
-                    showToast('Worker updated successfully!', 'success');
-                }
-            }, 1000);
-        }
-
-        // Delete a worker
-        function deleteWorker(id) {
-            showConfirmModal('Are you sure you want to delete this worker?', () => {
-                if (appState.useDemoData) {
-                    appState.workers = appState.workers.filter(worker => worker.id != id);
-                    renderWorkers();
-                    updateDashboard();
-                    closeModals();
-                    showToast('Worker deleted successfully!', 'success');
-                    return;
-                }
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navMenu.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Portfolio Filter
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
                 
-                // In a real implementation, this would call the Google Apps Script
-                showToast('Deleting worker...', 'info');
+                // Add active class to clicked button
+                button.classList.add('active');
                 
-                // Simulate API call
-                setTimeout(() => {
-                    appState.workers = appState.workers.filter(worker => worker.id != id);
-                    renderWorkers();
-                    updateDashboard();
-                    closeModals();
-                    showToast('Worker deleted successfully!', 'success');
-                }, 1000);
+                // Here you would typically filter the portfolio items
+                // This is just a placeholder for the functionality
             });
-        }
-
-        // Create a new project
-        function createProject(project) {
-            if (appState.useDemoData) {
-                project.id = Date.now();
-                appState.projects.push(project);
-                renderProjects();
-                updateDashboard();
-                closeModals();
-                showToast('Project added successfully!', 'success');
-                return;
-            }
-            
-            // In a real implementation, this would call the Google Apps Script
-            showToast('Creating project...', 'info');
-            
-            // Simulate API call
-            setTimeout(() => {
-                project.id = Date.now();
-                appState.projects.push(project);
-                renderProjects();
-                updateDashboard();
-                closeModals();
-                showToast('Project added successfully!', 'success');
-            }, 1000);
-        }
-
-        // Update a project
-        function updateProject(project) {
-            if (appState.useDemoData) {
-                const index = appState.projects.findIndex(p => p.id == project.id);
-                if (index !== -1) {
-                    appState.projects[index] = project;
-                    renderProjects();
-                    closeModals();
-                    showToast('Project updated successfully!', 'success');
-                }
-                return;
-            }
-            
-            // In a real implementation, this would call the Google Apps Script
-            showToast('Updating project...', 'info');
-            
-            // Simulate API call
-            setTimeout(() => {
-                const index = appState.projects.findIndex(p => p.id == project.id);
-                if (index !== -1) {
-                    appState.projects[index] = project;
-                    renderProjects();
-                    closeModals();
-                    showToast('Project updated successfully!', 'success');
-                }
-            }, 1000);
-        }
-
-        // Delete a project
-        function deleteProject(id) {
-            showConfirmModal('Are you sure you want to delete this project?', () => {
-                if (appState.useDemoData) {
-                    appState.projects = appState.projects.filter(project => project.id != id);
-                    renderProjects();
-                    updateDashboard();
-                    closeModals();
-                    showToast('Project deleted successfully!', 'success');
-                    return;
-                }
+        });
+        
+        // FAQ Accordion
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const faqItem = question.parentElement;
+                faqItem.classList.toggle('faq-active');
                 
-                // In a real implementation, this would call the Google Apps Script
-                showToast('Deleting project...', 'info');
-                
-                // Simulate API call
-                setTimeout(() => {
-                    appState.projects = appState.projects.filter(project => project.id != id);
-                    renderProjects();
-                    updateDashboard();
-                    closeModals();
-                    showToast('Project deleted successfully!', 'success');
-                }, 1000);
-            });
-        }
-
-        // Render workers table with pagination
-        function renderWorkers() {
-            let workers = [...appState.workers];
-            
-            // Apply search filter
-            if (appState.workerSearchTerm) {
-                const term = appState.workerSearchTerm.toLowerCase();
-                workers = workers.filter(worker => 
-                    worker.name.toLowerCase().includes(term) ||
-                    worker.phone.toLowerCase().includes(term)
-                );
-            }
-            
-            // Apply sorting
-            switch (appState.workerSortBy) {
-                case 'name':
-                    workers.sort((a, b) => a.name.localeCompare(b.name));
-                    break;
-                case 'balance':
-                    workers.sort((a, b) => b.balance - a.balance);
-                    break;
-                case 'balance-asc':
-                    workers.sort((a, b) => a.balance - b.balance);
-                    break;
-                case 'daysWorked':
-                    workers.sort((a, b) => b.days_worked - a.days_worked);
-                    break;
-            }
-            
-            // Calculate pagination
-            const totalPages = Math.ceil(workers.length / appState.workersPerPage);
-            const startIndex = (appState.currentWorkerPage - 1) * appState.workersPerPage;
-            const endIndex = startIndex + appState.workersPerPage;
-            const paginatedWorkers = workers.slice(startIndex, endIndex);
-            
-            // Render table
-            if (paginatedWorkers.length === 0) {
-                elements.workersTable.innerHTML = `
-                    <tr>
-                        <td colspan="8" class="px-4 py-4 text-center text-gray-500">No workers found</td>
-                    </tr>
-                `;
-            } else {
-                elements.workersTable.innerHTML = paginatedWorkers.map(worker => `
-                    <tr>
-                        <td class="px-4 py-4 whitespace-nowrap">${worker.name}</td>
-                        <td class="px-4 py-4 whitespace-nowrap">${worker.phone}</td>
-                        <td class="px-4 py-4 whitespace-nowrap">$${worker.daily_wage.toFixed(2)}</td>
-                        <td class="px-4 py-4 whitespace-nowrap">${worker.days_worked}</td>
-                        <td class="px-4 py-4 whitespace-nowrap">$${(worker.daily_wage * worker.days_worked).toFixed(2)}</td>
-                        <td class="px-4 py-4 whitespace-nowrap">$${worker.paid.toFixed(2)}</td>
-                        <td class="px-4 py-4 whitespace-nowrap">
-                            <span class="px-2 py-1 rounded-full text-xs font-semibold ${worker.balance > 0 ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800'}">
-                                $${worker.balance.toFixed(2)}
-                            </span>
-                        </td>
-                        <td class="px-4 py-4 whitespace-nowrap text-sm font-medium">
-                            <button class="text-blue-600 hover:text-blue-900 edit-worker mr-3" data-id="${worker.id}">Edit</button>
-                            <button class="text-red-600 hover:text-red-900 delete-worker" data-id="${worker.id}">Delete</button>
-                        </td>
-                    </tr>
-                `).join('');
-                
-                // Add event listeners to edit and delete buttons
-                elements.workersTable.querySelectorAll('.edit-worker').forEach(button => {
-                    button.addEventListener('click', (e) => {
-                        const id = e.target.getAttribute('data-id');
-                        const worker = appState.workers.find(w => w.id == id);
-                        if (worker) showWorkerModal(worker);
-                    });
-                });
-                
-                elements.workersTable.querySelectorAll('.delete-worker').forEach(button => {
-                    button.addEventListener('click', (e) => {
-                        const id = e.target.getAttribute('data-id');
-                        deleteWorker(id);
-                    });
-                });
-            }
-            
-            // Render pagination
-            renderPagination('worker', appState.currentWorkerPage, totalPages);
-        }
-
-        // Render projects table with pagination
-        function renderProjects() {
-            let projects = [...appState.projects];
-            
-            // Apply search filter
-            if (appState.projectSearchTerm) {
-                const term = appState.projectSearchTerm.toLowerCase();
-                projects = projects.filter(project => 
-                    project.project_name.toLowerCase().includes(term) ||
-                    project.client.toLowerCase().includes(term) ||
-                    project.address.toLowerCase().includes(term)
-                );
-            }
-            
-            // Apply sorting
-            switch (appState.projectSortBy) {
-                case 'projectName':
-                    projects.sort((a, b) => a.project_name.localeCompare(b.project_name));
-                    break;
-                case 'startDate':
-                    projects.sort((a, b) => new Date(b.start_date) - new Date(a.start_date));
-                    break;
-                case 'startDate-asc':
-                    projects.sort((a, b) => new Date(a.start_date) - new Date(b.start_date));
-                    break;
-                case 'client':
-                    projects.sort((a, b) => a.client.localeCompare(b.client));
-                    break;
-            }
-            
-            // Calculate pagination
-            const totalPages = Math.ceil(projects.length / appState.projectsPerPage);
-            const startIndex = (appState.currentProjectPage - 1) * appState.projectsPerPage;
-            const endIndex = startIndex + appState.projectsPerPage;
-            const paginatedProjects = projects.slice(startIndex, endIndex);
-            
-            // Render table
-            if (paginatedProjects.length === 0) {
-                elements.projectsTable.innerHTML = `
-                    <tr>
-                        <td colspan="7" class="px-4 py-4 text-center text-gray-500">No projects found</td>
-                    </tr>
-                `;
-            } else {
-                elements.projectsTable.innerHTML = paginatedProjects.map(project => `
-                    <tr>
-                        <td class="px-4 py-4 whitespace-nowrap">${project.project_name}</td>
-                        <td class="px-4 py-4 whitespace-nowrap">${project.client}</td>
-                        <td class="px-4 py-4">${project.address || 'N/A'}</td>
-                        <td class="px-4 py-4 whitespace-nowrap">${project.start_date || 'N/A'}</td>
-                        <td class="px-4 py-4 whitespace-nowrap">${project.end_date || 'N/A'}</td>
-                        <td class="px-4 py-4">${project.assigned_workers || 'None'}</td>
-                        <td class="px-4 py-4 whitespace-nowrap text-sm font-medium">
-                            <button class="text-blue-600 hover:text-blue-900 edit-project mr-3" data-id="${project.id}">Edit</button>
-                            <button class="text-red-600 hover:text-red-900 delete-project" data-id="${project.id}">Delete</button>
-                        </td>
-                    </tr>
-                `).join('');
-                
-                // Add event listeners to edit and delete buttons
-                elements.projectsTable.querySelectorAll('.edit-project').forEach(button => {
-                    button.addEventListener('click', (e) => {
-                        const id = e.target.getAttribute('data-id');
-                        const project = appState.projects.find(p => p.id == id);
-                        if (project) showProjectModal(project);
-                    });
-                });
-                
-                elements.projectsTable.querySelectorAll('.delete-project').forEach(button => {
-                    button.addEventListener('click', (e) => {
-                        const id = e.target.getAttribute('data-id');
-                        deleteProject(id);
-                    });
-                });
-            }
-            
-            // Render pagination
-            renderPagination('project', appState.currentProjectPage, totalPages);
-        }
-
-        // Render pagination controls
-        function renderPagination(type, currentPage, totalPages) {
-            const container = type === 'worker' 
-                ? elements.workerPaginationContainer 
-                : elements.projectPaginationContainer;
-                
-            if (totalPages <= 1) {
-                container.innerHTML = '';
-                return;
-            }
-            
-            let html = `
-                <div class="flex-1 flex justify-between sm:hidden">
-                    <button class="relative inline-flex items-center px-2 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-50'}" 
-                        ${currentPage === 1 ? 'disabled' : ''} id="${type}-prev-mobile">
-                        Previous
-                    </button>
-                    <button class="ml-3 relative inline-flex items-center px-2 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-50'}" 
-                        ${currentPage === totalPages ? 'disabled' : ''} id="${type}-next-mobile">
-                        Next
-                    </button>
-                </div>
-                <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
-                    <div>
-                        <p class="text-sm text-gray-700">
-                            Showing <span class="font-medium">${((currentPage - 1) * (type === 'worker' ? appState.workersPerPage : appState.projectsPerPage)) + 1}</span> to 
-                            <span class="font-medium">${Math.min(currentPage * (type === 'worker' ? appState.workersPerPage : appState.projectsPerPage), type === 'worker' ? appState.workers.length : appState.projects.length)}</span> of 
-                            <span class="font-medium">${type === 'worker' ? appState.workers.length : appState.projects.length}</span> results
-                        </p>
-                    </div>
-                    <div>
-                        <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
-            `;
-            
-            // Previous button
-            html += `
-                <button class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-50'}" 
-                    ${currentPage === 1 ? 'disabled' : ''} id="${type}-prev">
-                    <span class="sr-only">Previous</span>
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-            `;
-            
-            // Page numbers
-            const maxVisiblePages = 5;
-            let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
-            let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
-            
-            if (endPage - startPage + 1 < maxVisiblePages) {
-                startPage = Math.max(1, endPage - maxVisiblePages + 1);
-            }
-            
-            for (let i = startPage; i <= endPage; i++) {
-                html += `
-                    <button class="relative inline-flex items-center px-3 py-2 border text-sm font-medium ${i === currentPage ? 'z-10 bg-blue-50 border-blue-500 text-blue-600' : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50'}" 
-                        data-page="${i}" id="${type}-page-${i}">
-                        ${i}
-                    </button>
-                `;
-            }
-            
-            // Next button
-            html += `
-                <button class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-50'}" 
-                    ${currentPage === totalPages ? 'disabled' : ''} id="${type}-next">
-                    <span class="sr-only">Next</span>
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-            `;
-            
-            html += `
-                        </nav>
-                    </div>
-                </div>
-            `;
-            
-            container.innerHTML = html;
-            
-            // Add event listeners
-            if (currentPage > 1) {
-                document.getElementById(`${type}-prev`).addEventListener('click', () => {
-                    if (type === 'worker') {
-                        appState.currentWorkerPage--;
-                        renderWorkers();
-                    } else {
-                        appState.currentProjectPage--;
-                        renderProjects();
-                    }
-                });
-                
-                document.getElementById(`${type}-prev-mobile`).addEventListener('click', () => {
-                    if (type === 'worker') {
-                        appState.currentWorkerPage--;
-                        renderWorkers();
-                    } else {
-                        appState.currentProjectPage--;
-                        renderProjects();
-                    }
-                });
-            }
-            
-            if (currentPage < totalPages) {
-                document.getElementById(`${type}-next`).addEventListener('click', () => {
-                    if (type === 'worker') {
-                        appState.currentWorkerPage++;
-                        renderWorkers();
-                    } else {
-                        appState.currentProjectPage++;
-                        renderProjects();
-                    }
-                });
-                
-                document.getElementById(`${type}-next-mobile`).addEventListener('click', () => {
-                    if (type === 'worker') {
-                        appState.currentWorkerPage++;
-                        renderWorkers();
-                    } else {
-                        appState.currentProjectPage++;
-                        renderProjects();
-                    }
-                });
-            }
-            
-            for (let i = startPage; i <= endPage; i++) {
-                if (i !== currentPage) {
-                    document.getElementById(`${type}-page-${i}`).addEventListener('click', () => {
-                        if (type === 'worker') {
-                            appState.currentWorkerPage = i;
-                            renderWorkers();
-                        } else {
-                            appState.currentProjectPage = i;
-                            renderProjects();
-                        }
-                    });
-                }
-            }
-        }
-
-        // Update dashboard stats
-        function updateDashboard() {
-            // Update worker count
-            elements.totalWorkers.textContent = appState.workers.length;
-            
-            // Update project count (consider active if end date is in the future or not set)
-            const activeProjects = appState.projects.filter(project => {
-                if (!project.end_date) return true;
-                return new Date(project.end_date) >= new Date();
-            });
-            elements.activeProjects.textContent = activeProjects.length;
-            
-            // Update total balance
-            const totalBalance = appState.workers.reduce((sum, worker) => sum + worker.balance, 0);
-            elements.totalBalance.textContent = `$${totalBalance.toFixed(2)}`;
-            
-            // Update recent activity
-            updateRecentActivity();
-        }
-
-        // Update recent activity list
-        function updateRecentActivity() {
-            // In a real app, this would come from actual activity logs
-            // For now, we'll create some sample activities
-            const activities = [
-                { type: 'Worker', details: 'John Doe added', date: new Date().toLocaleDateString() },
-                { type: 'Project', details: 'Office Renovation updated', date: new Date().toLocaleDateString() },
-                { type: 'Payment', details: '$500 paid to Jane Smith', date: new Date().toLocaleDateString() }
-            ];
-            
-            if (appState.workers.length > 0 && appState.projects.length > 0) {
-                elements.recentActivity.innerHTML = activities.map(activity => `
-                    <tr>
-                        <td class="px-4 py-4 whitespace-nowrap">
-                            <span class="px-2 py-1 text-xs font-semibold rounded-full ${activity.type === 'Worker' ? 'bg-blue-100 text-blue-800' : activity.type === 'Project' ? 'bg-green-100 text-green-800' : 'bg-purple-100 text-purple-800'}">
-                                ${activity.type}
-                            </span>
-                        </td>
-                        <td class="px-4 py-4">${activity.details}</td>
-                        <td class="px-4 py-4 whitespace-nowrap">${activity.date}</td>
-                    </tr>
-                `).join('');
-            }
-        }
-
-        // Show toast notification
-        function showToast(message, type = 'info') {
-            // Ensure toast container exists
-            if (!elements.toastContainer) {
-                console.error('Toast container not found');
-                return;
-            }
-            
-            const toast = document.createElement('div');
-            toast.className = `toast p-4 rounded-md shadow-md text-white ${type === 'success' ? 'bg-green-500' : type === 'error' ? 'bg-red-500' : 'bg-blue-500'}`;
-            toast.textContent = message;
-            
-            elements.toastContainer.appendChild(toast);
-            
-            // Remove toast after 3 seconds
-            setTimeout(() => {
-                toast.style.opacity = '0';
-                setTimeout(() => {
-                    if (toast.parentNode) {
-                        elements.toastContainer.removeChild(toast);
-                    }
-                }, 300);
-            }, 3000);
-        }
-
-        // Export workers to CSV
-        function exportWorkersCSV() {
-            if (appState.workers.length === 0) {
-                showToast('No workers to export', 'error');
-                return;
-            }
-            
-            const headers = ['Name', 'Phone', 'Daily Wage', 'Days Worked', 'Total Earned', 'Paid', 'Balance'];
-            const data = appState.workers.map(worker => [
-                worker.name,
-                worker.phone,
-                worker.daily_wage,
-                worker.days_worked,
-                worker.daily_wage * worker.days_worked,
-                worker.paid,
-                worker.balance
-            ]);
-            
-            exportToCSV('workers.csv', headers, data);
-            showToast('Workers exported successfully', 'success');
-        }
-
-        // Export projects to CSV
-        function exportProjectsCSV() {
-            if (appState.projects.length === 0) {
-                showToast('No projects to export', 'error');
-                return;
-            }
-            
-            const headers = ['Project Name', 'Client', 'Address', 'Start Date', 'End Date', 'Assigned Workers', 'Notes'];
-            const data = appState.projects.map(project => [
-                project.project_name,
-                project.client,
-                project.address,
-                project.start_date,
-                project.end_date,
-                project.assigned_workers,
-                project.notes
-            ]);
-            
-            exportToCSV('projects.csv', headers, data);
-            showToast('Projects exported successfully', 'success');
-        }
-
-        // Export data to CSV file
-        function exportToCSV(filename, headers, data) {
-            const csvContent = [
-                headers.join(','),
-                ...data.map(row => row.map(field => `"${field}"`).join(','))
-            ].join('\n');
-            
-            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-            const link = document.createElement('a');
-            const url = URL.createObjectURL(blob);
-            
-            link.setAttribute('href', url);
-            link.setAttribute('download', filename);
-            link.style.visibility = 'hidden';
-            
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
-
-        // Import CSV data
-        function importCSV() {
-            const fileInput = document.getElementById('importFile');
-            const dataType = document.getElementById('importDataType').value;
-            const replace = document.getElementById('replaceData').checked;
-            
-            if (!fileInput.files.length) {
-                showToast('Please select a CSV file', 'error');
-                return;
-            }
-            
-            const file = fileInput.files[0];
-            const reader = new FileReader();
-            
-            reader.onload = function(e) {
-                const csv = e.target.result;
-                const lines = csv.split('\n');
-                const headers = lines[0].split(',').map(header => header.trim().replace(/"/g, ''));
-                
-                const data = [];
-                for (let i = 1; i < lines.length; i++) {
-                    if (lines[i].trim() === '') continue;
-                    
-                    const values = lines[i].split(',').map(value => value.trim().replace(/"/g, ''));
-                    const obj = {};
-                    
-                    headers.forEach((header, index) => {
-                        obj[header] = values[index] || '';
-                    });
-                    
-                    data.push(obj);
-                }
-                
-                if (dataType === 'workers') {
-                    if (replace) {
-                        appState.workers = data;
-                    } else {
-                        appState.workers = [...appState.workers, ...data];
-                    }
-                    renderWorkers();
+                const icon = question.querySelector('i');
+                if (faqItem.classList.contains('faq-active')) {
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
                 } else {
-                    if (replace) {
-                        appState.projects = data;
-                    } else {
-                        appState.projects = [...appState.projects, ...data];
-                    }
-                    renderProjects();
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
                 }
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
                 
-                updateDashboard();
-                showToast(`${dataType.charAt(0).toUpperCase() + dataType.slice(1)} imported successfully`, 'success');
-                closeModals();
-            };
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (navMenu.classList.contains('active')) {
+                        navMenu.classList.remove('active');
+                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                }
+            });
+        });
+        
+        // WhatsApp Link Detection
+        function detectWhatsApp() {
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            const whatsappLink = document.getElementById('whatsappLink');
             
-            reader.readAsText(file);
-        }
-
-        // Sync data with Google Sheets
-        function syncData() {
-            if (appState.useDemoData) {
-                showToast('Demo mode active - data synced locally', 'info');
-                return;
-            }
-            
-            if (!appState.scriptUrl) {
-                showToast('Please configure Google Sheets integration first', 'error');
-                elements.setupModal.classList.remove('hidden');
-                return;
-            }
-            
-            showToast('Syncing data with Google Sheets...', 'info');
-            
-            // In a real implementation, this would call the Google Apps Script
-            setTimeout(() => {
-                showToast('Data synced successfully', 'success');
-            }, 2000);
-        }
-
-        // Fetch data from Google Sheets
-        function fetchData() {
-            if (appState.useDemoData) {
-                loadDemoData();
-                return;
-            }
-            
-            if (!appState.scriptUrl) {
-                showToast('Please configure Google Sheets integration first', 'error');
-                return;
-            }
-            
-            showToast('Fetching data from Google Sheets...', 'info');
-            
-            // In a real implementation, this would call the Google Apps Script
-            setTimeout(() => {
-                loadDemoData(); // For demo purposes, we'll load demo data
-                showToast('Data loaded successfully', 'success');
-            }, 2000);
-        }
-
-        // Load demo data
-        function loadDemoData() {
-            appState.workers = demoData.workers;
-            appState.projects = demoData.projects;
-            
-            renderWorkers();
-            renderProjects();
-            updateDashboard();
-        }
-
-        // Save Google Apps Script URL
-        function saveScriptUrl() {
-            const url = elements.scriptUrl.value.trim();
-            
-            if (!url) {
-                showToast('Please enter a valid URL', 'error');
-                return;
-            }
-            
-            appState.scriptUrl = url;
-            localStorage.setItem('constructionScriptUrl', url);
-            showToast('URL saved successfully', 'success');
-            
-            // Test the connection
-            fetchData();
-        }
-
-        // Enable demo mode
-        function enableDemoMode() {
-            appState.useDemoData = true;
-            localStorage.setItem('constructionUseDemoData', 'true');
-            loadDemoData();
-            showToast('Demo mode enabled', 'success');
-        }
-
-        // Close setup modal
-        function closeSetup() {
-            elements.setupModal.classList.add('hidden');
-            
-            // If no data is loaded yet, load demo data
-            if (appState.workers.length === 0 && appState.projects.length === 0) {
-                loadDemoData();
+            if (isMobile) {
+                whatsappLink.href = 'whatsapp://send?phone=+923053016806';
+            } else {
+                whatsappLink.href = 'https://web.whatsapp.com/send?phone=+923053016806';
             }
         }
-
-        // Initialize the app when the DOM is loaded
-        document.addEventListener('DOMContentLoaded', initApp);
+        
+        // Email Link
+        document.getElementById('emailLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = 'mailto:info@ilyasconstruction.com?subject=Construction Inquiry&body=Hello, I am interested in your construction services.';
+        });
+        
+        // Form Submission
+        document.getElementById('constructionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your inquiry! We will contact you shortly.');
+            this.reset();
+        });
+        
+        // Initialize WhatsApp detection
+        detectWhatsApp();
     </script>
 </body>
 </html>
